@@ -6,7 +6,12 @@ import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.lifecycle.ViewModelProvider
 import app.ericn.ericsweather.R
+import app.ericn.ericsweather.RetrofitClient
+import app.ericn.ericsweather.ui.main.core.CurrentWeatherInteractor
+import app.ericn.ericsweather.ui.main.core.WeatherRepository
+import app.ericn.ericsweather.ui.main.network.WeatherApi
 
 class MainFragment : Fragment() {
 
@@ -23,8 +28,12 @@ class MainFragment : Fragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        viewModel = ViewModelProviders.of(this).get(MainViewModel::class.java)
-        // TODO: Use the ViewModel
+
+        val api = RetrofitClient.retrofit().create(WeatherApi::class.java)
+        val repository = WeatherRepository(api)
+        val interactor = CurrentWeatherInteractor(repository)
+        val vmFactory = MainViewModelFactory(interactor)
+        viewModel = ViewModelProvider(requireActivity(), vmFactory).get(MainViewModel::class.java)
     }
 
 }
