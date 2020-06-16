@@ -5,22 +5,29 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import app.ericn.ericsweather.R
 import app.ericn.ericsweather.StringProvider
-import app.ericn.ericsweather.ui.main.core.CurrentWeather
 import app.ericn.ericsweather.ui.main.core.CurrentWeatherInteractor
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.addTo
-import kotlinx.android.synthetic.main.main_fragment.view.*
+import io.reactivex.schedulers.Schedulers
+import io.reactivex.subjects.PublishSubject
 
-class MainViewModel(interactor: CurrentWeatherInteractor, stringProvider: StringProvider) :
+class WeatherViewModel(
+    interactor: CurrentWeatherInteractor,
+    stringProvider: StringProvider,
+    searchSubject: PublishSubject<String>
+) :
     ViewModel() {
     private val viewState = MutableLiveData<ViewState>()
     val viewStateReadOnly: LiveData<ViewState> = viewState
     private val disposables = CompositeDisposable()
 
     init {
-        interactor("Toronto")
-            .observeOn(AndroidSchedulers.mainThread())
+        searchSubject.observeOn(Schedulers.io()).doOnNext {
+            println("search query is $it")
+        }.flatMapSingle { cityName ->
+            interactor(cityName)
+        }.observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
                 viewState.value =
                     ViewState.DataLoaded(

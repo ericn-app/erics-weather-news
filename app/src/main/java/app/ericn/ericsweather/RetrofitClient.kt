@@ -1,6 +1,7 @@
 package app.ericn.ericsweather
 
 import okhttp3.*
+import okhttp3.logging.HttpLoggingInterceptor
 import okio.IOException
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -30,6 +31,9 @@ object RetrofitClient {
                 return chain.proceed(request)
             }
         })
+        if (BuildConfig.DEBUG) {
+            httpClient.addInterceptor(HttpLoggingInterceptor().setLevel(HttpLoggingInterceptor.Level.BODY))
+        }
 
         return Retrofit.Builder()
             .baseUrl("https://api.openweathermap.org")
