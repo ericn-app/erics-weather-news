@@ -1,2 +1,3 @@
+include ':ericsnews'
 include ':app'
 rootProject.name = "Eric's Weather"
