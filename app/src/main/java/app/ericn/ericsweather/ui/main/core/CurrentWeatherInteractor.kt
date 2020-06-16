@@ -11,7 +11,7 @@ class CurrentWeatherInteractor(private val repository: WeatherRepository) {
                 maxTemp = it.main.tempMax.roundToInt(),
                 minTemp = it.main.tempMin.roundToInt(),
                 currentTemp = it.main.temp.roundToInt(),
-                symbol = it.weather[0].icon
+                symbol = "https://openweathermap.org/img/w/${it.weather[0].icon}.png"
             )
         }
     }

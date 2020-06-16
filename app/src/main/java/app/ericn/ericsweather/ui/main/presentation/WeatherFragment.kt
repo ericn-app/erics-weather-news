@@ -14,6 +14,7 @@ import app.ericn.ericsweather.StringProviderImpl
 import app.ericn.ericsweather.databinding.MainFragmentBinding
 import app.ericn.ericsweather.ui.main.core.CurrentWeatherInteractor
 import app.ericn.ericsweather.ui.main.core.GlideImageLoader
+import app.ericn.ericsweather.ui.main.core.WeatherForecastInteractor
 import app.ericn.ericsweather.ui.main.core.WeatherRepository
 import app.ericn.ericsweather.ui.main.network.WeatherApi
 import io.reactivex.subjects.PublishSubject
@@ -54,10 +55,12 @@ class WeatherFragment : Fragment() {
 
         val api = RetrofitClient.retrofit().create(WeatherApi::class.java)
         val repository = WeatherRepository(api)
-        val interactor = CurrentWeatherInteractor(repository)
+        val currentInteractor = CurrentWeatherInteractor(repository)
+        val forecastInteractor = WeatherForecastInteractor(repository)
         val vmFactory =
             MainViewModelFactory(
-                interactor,
+                currentInteractor,
+                forecastInteractor,
                 StringProviderImpl(resources),
                 searchSubject
             )
@@ -65,7 +68,7 @@ class WeatherFragment : Fragment() {
 
         viewModel.viewStateReadOnly.observe(viewLifecycleOwner, Observer { state ->
             when (state) {
-                is WeatherViewModel.ViewState.DataLoaded -> renderData(state.currentWeather)
+                is WeatherViewModel.ViewState.DataLoaded -> renderData(state)
                 WeatherViewModel.ViewState.Loading -> {
                     // show loading animation
                 }
@@ -84,11 +87,17 @@ class WeatherFragment : Fragment() {
         Toast.makeText(requireContext(), message, Toast.LENGTH_SHORT).show()
     }
 
-    private fun renderData(currentWeather: CurrentWeatherUI) {
-        binding.cityName.text = currentWeather.cityName
-        binding.maxMin.text = currentWeather.maxMin
-        binding.current.text = currentWeather.currentTemp
-        imageLoader.load(binding.iconToday, currentWeather.symbol)
+    private fun renderData(data: WeatherViewModel.ViewState.DataLoaded) {
+        binding.cityName.text = data.currentWeather.cityName
+        binding.maxMin.text = data.currentWeather.maxMin
+        binding.current.text = data.currentWeather.currentTemp
+        imageLoader.load(binding.iconToday, data.currentWeather.symbol)
+        imageLoader.load(binding.symbolTomorrow, data.tomorrow.symbol)
+        imageLoader.load(binding.symbolDayAfter, data.dayAfter.symbol)
+        imageLoader.load(binding.symbolTwoDaysLater, data.twoDaysLater.symbol)
+        binding.tempTomorrow.text = data.tomorrow.maxMin
+        binding.tempDayAfter.text = data.dayAfter.maxMin
+        binding.tempTwoDaysLater.text = data.twoDaysLater.maxMin
     }
 
 }
