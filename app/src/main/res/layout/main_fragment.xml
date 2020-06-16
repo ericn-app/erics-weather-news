@@ -6,7 +6,7 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:padding="16dp"
-    tools:context=".ui.main.MainFragment">
+    tools:context=".ui.main.presentation.WeatherFragment">
 
     <TextView
         android:id="@+id/tv_label"
@@ -23,17 +23,18 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textColor="@android:color/black"
-        android:textSize="40sp"
+        android:textSize="48sp"
+        android:paddingBottom="16dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@id/tv_label" />
 
     <ImageView
         android:id="@+id/icon_today"
-        android:layout_width="100dp"
-        android:layout_height="100dp"
+        android:layout_width="130dp"
+        android:layout_height="130dp"
         android:contentDescription="weather symbol"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_label" />
+        app:layout_constraintTop_toTopOf="@id/tv_label" />
 
     <TextView
         android:id="@+id/max_min"

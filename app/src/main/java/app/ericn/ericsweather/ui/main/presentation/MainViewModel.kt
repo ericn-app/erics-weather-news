@@ -19,26 +19,36 @@ class MainViewModel(interactor: CurrentWeatherInteractor, stringProvider: String
     private val disposables = CompositeDisposable()
 
     init {
-        interactor.invoke().observeOn(AndroidSchedulers.mainThread()).subscribe({ result ->
-            viewState.value =
-                ViewState.DataLoaded(
-                    CurrentWeatherUI(
-                        cityName = result.cityName,
-                        maxMin = stringProvider.getString(
-                            R.string.max_min,
-                            result.maxTemp.toString(),
-                            result.minTemp.toString()
-                        ),
-                        currentTemp = stringProvider.getString(R.string.current, result.currentTemp),
-                        symbol = "https://openweathermap.org/img/w/${result.symbol}.png"
+        interactor("Toronto")
+            .observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ result ->
+                viewState.value =
+                    ViewState.DataLoaded(
+                        CurrentWeatherUI(
+                            cityName = result.cityName,
+                            maxMin = stringProvider.getString(
+                                R.string.max_min,
+                                result.maxTemp.toString(),
+                                result.minTemp.toString()
+                            ),
+                            currentTemp = stringProvider.getString(
+                                R.string.current,
+                                result.currentTemp
+                            ),
+                            symbol = "https://openweathermap.org/img/w/${result.symbol}.png"
+                        )
                     )
-                )
-        }, { t ->
-            viewState.value =
-                ViewState.Error(
-                    "Sorry something went wrong"
-                )
-        }).addTo(disposables)
+            }, { t ->
+                viewState.value =
+                    ViewState.Error(
+                        "Sorry something went wrong"
+                    )
+            }).addTo(disposables)
+    }
+
+    override fun onCleared() {
+        disposables.dispose()
+        super.onCleared()
     }
 
     sealed class ViewState {

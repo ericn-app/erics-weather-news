@@ -6,7 +6,7 @@ import io.reactivex.Single
 import io.reactivex.schedulers.Schedulers
 
 class WeatherRepository(private val api: WeatherApi) {
-    fun fetchCurrent(): Single<CurrentWeatherResponse> {
-        return api.fetchOrdersObservable("London").subscribeOn(Schedulers.io())
+    fun fetchCurrent(cityName: String): Single<CurrentWeatherResponse> {
+        return api.fetchOrdersObservable(cityName).subscribeOn(Schedulers.io())
     }
 }

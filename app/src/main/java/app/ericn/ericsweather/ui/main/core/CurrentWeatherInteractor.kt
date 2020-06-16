@@ -4,8 +4,8 @@ import io.reactivex.Single
 import kotlin.math.roundToInt
 
 class CurrentWeatherInteractor(private val repository: WeatherRepository) {
-    operator fun invoke(): Single<CurrentWeather> {
-        return repository.fetchCurrent().map {
+    operator fun invoke(cityName: String): Single<CurrentWeather> {
+        return repository.fetchCurrent(cityName).map {
             CurrentWeather(
                 cityName = it.name,
                 maxTemp = it.main.tempMax.roundToInt(),
