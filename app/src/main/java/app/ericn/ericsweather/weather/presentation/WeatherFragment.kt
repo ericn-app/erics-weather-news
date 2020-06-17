@@ -7,17 +7,10 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
-import app.ericn.ericsweather.weather.RetrofitClient
-import app.ericn.ericsweather.StringProviderImpl
+import app.ericn.android_common.StringProviderImpl
 import app.ericn.ericsweather.databinding.MainFragmentBinding
-import app.ericn.ericsweather.weather.core.CurrentWeatherInteractor
 import app.ericn.ericsweather.GlideImageLoader
-import app.ericn.ericsweather.weather.core.WeatherForecastInteractor
-import app.ericn.ericsweather.weather.core.WeatherRepository
-import app.ericn.ericsweather.weather.network.WeatherApi
 import dagger.android.support.DaggerFragment
-import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class WeatherFragment : DaggerFragment() {
@@ -44,30 +37,18 @@ class WeatherFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-//        val api = RetrofitClient.retrofit().create(WeatherApi::class.java)
-//        val repository = WeatherRepository(api)
-//        val currentInteractor = CurrentWeatherInteractor(repository)
-//        val forecastInteractor = WeatherForecastInteractor(repository)
-//
-//        println(viewModelFactory)
-//        val vmFactory =
-//            WeatherViewModelFactory(
-//                currentInteractor,
-//                forecastInteractor,
-//                StringProviderImpl(resources),
-//                searchSubject
-//            )
-//        viewModel = ViewModelProvider(requireActivity(), vmFactory).get(WeatherViewModel::class.java)
-
         viewModel.viewStateReadOnly.observe(viewLifecycleOwner, Observer { state ->
+            showLoading(false)
             when (state) {
                 is WeatherViewModel.ViewState.DataLoaded -> renderData(state)
-                WeatherViewModel.ViewState.Loading -> {
-                    // show loading animation
-                }
+                WeatherViewModel.ViewState.Loading -> showLoading(true)
                 is WeatherViewModel.ViewState.Error -> renderError(state.message)
             }
         })
+    }
+
+    private fun showLoading(b: Boolean) {
+
     }
 
     private fun renderError(message: String) {

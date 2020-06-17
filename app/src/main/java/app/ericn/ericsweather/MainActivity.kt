@@ -1,14 +1,12 @@
 package app.ericn.ericsweather
 
-import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView
+import app.ericn.ericsweather.ui.news.NewsFragment
 import app.ericn.ericsweather.databinding.MainActivityBinding
 import app.ericn.ericsweather.weather.presentation.WeatherFragment
-import app.ericn.ericsweather.weather.presentation.WeatherViewModelFactory
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.subjects.PublishSubject
-import java.util.concurrent.TimeUnit
 import javax.inject.Inject
 
 class MainActivity : DaggerAppCompatActivity() {
@@ -41,6 +39,8 @@ class MainActivity : DaggerAppCompatActivity() {
             supportFragmentManager.beginTransaction()
                 .replace(R.id.containers_weather, WeatherFragment.newInstance())
                 .commitNow()
+            supportFragmentManager.beginTransaction()
+                .replace(R.id.container_news, NewsFragment.newInstance()).commitNow()
         }
     }
 }

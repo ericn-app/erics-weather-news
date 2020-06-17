@@ -3,10 +3,11 @@ package app.ericn.ericsweather.weather.presentation
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
+import app.ericn.android_common.StringProvider
 import app.ericn.ericsweather.R
-import app.ericn.ericsweather.StringProvider
 import app.ericn.ericsweather.weather.core.CurrentWeatherInteractor
 import app.ericn.ericsweather.weather.core.WeatherForecastInteractor
+import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.Singles
@@ -18,7 +19,7 @@ class WeatherViewModel(
     currentInteractor: CurrentWeatherInteractor,
     forecastInteractor: WeatherForecastInteractor,
     stringProvider: StringProvider,
-    searchSubject: PublishSubject<String>
+    searchSubject: Observable<String>
 ) :
     ViewModel() {
     private val viewState = MutableLiveData<ViewState>()
@@ -78,9 +79,7 @@ class WeatherViewModel(
                     )
             }, { t ->
                 viewState.value =
-                    ViewState.Error(
-                        "Sorry something went wrong"
-                    )
+                    ViewState.Error(t.message?: stringProvider.getString(R.string.error_generic))
             }).addTo(disposables)
     }
 
