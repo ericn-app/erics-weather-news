@@ -73,7 +73,6 @@ class NewsFragment : DaggerFragment() {
     }
 
     private fun renderData(data: NewsViewModel.ViewState.DataLoaded) {
-        println("renderData")
         adapter.update(data.articles)
     }
 }

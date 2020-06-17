@@ -5,7 +5,7 @@
     android:id="@+id/news"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
-    android:background="@android:color/darker_gray"
+    android:background="@color/background"
     android:padding="32dp"
     android:paddingTop="0dp">
 
@@ -23,7 +23,7 @@
         android:layout_height="wrap_content"
         android:text="@string/news_highlights"
         android:textColor="@android:color/black"
-        android:textSize="48sp"
+        android:textSize="40sp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
