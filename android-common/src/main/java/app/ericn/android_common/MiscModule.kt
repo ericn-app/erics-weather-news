@@ -10,4 +10,9 @@ class MiscModule {
     fun provideStringProvider(context: Application): app.ericn.android_common.StringProvider {
         return StringProviderImpl(context.resources)
     }
+
+    @Provides
+    fun provideImageLoader(): ImageLoader {
+        return GlideImageLoader()
+    }
 }

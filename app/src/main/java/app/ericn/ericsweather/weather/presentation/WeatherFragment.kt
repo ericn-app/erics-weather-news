@@ -7,9 +7,8 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import app.ericn.android_common.StringProviderImpl
-import app.ericn.ericsweather.databinding.MainFragmentBinding
-import app.ericn.ericsweather.GlideImageLoader
+import app.ericn.android_common.ImageLoader
+import app.ericn.ericsweather.databinding.WeatherFragmentBinding
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -21,16 +20,17 @@ class WeatherFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: WeatherViewModelFactory
+    @Inject
+    lateinit var imageLoader: ImageLoader
 
-    private lateinit var binding: MainFragmentBinding
-    private val imageLoader = GlideImageLoader()
+    private lateinit var binding: WeatherFragmentBinding
     private val viewModel: WeatherViewModel by viewModels { viewModelFactory }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        binding = MainFragmentBinding.inflate(inflater, container, false)
+        binding = WeatherFragmentBinding.inflate(inflater, container, false)
         return binding.root
     }
 

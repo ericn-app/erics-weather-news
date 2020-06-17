@@ -1,4 +1,4 @@
-package app.ericn.ericsweather
+package app.ericn.android_common
 
 import android.widget.ImageView
 

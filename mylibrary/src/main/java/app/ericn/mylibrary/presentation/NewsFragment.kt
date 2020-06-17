@@ -1,15 +1,16 @@
 package app.ericn.ericsweather.ui.news
 
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProviders
-import app.ericn.mylibrary.R
+import app.ericn.android_common.ImageLoader
+import app.ericn.mylibrary.VerticalSpaceItemDecoration
+import app.ericn.mylibrary.databinding.NewsFragmentBinding
+import app.ericn.mylibrary.presentation.NewsAdapter
 import app.ericn.mylibrary.presentation.NewsViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
@@ -22,13 +23,19 @@ class NewsFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: NewsViewModelFactory
+    @Inject
+    lateinit var imageLoader: ImageLoader
+
+    private lateinit var binding: NewsFragmentBinding
     private val viewModel: NewsViewModel by viewModels { viewModelFactory }
+    private lateinit var adapter: NewsAdapter
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View {
-        return inflater.inflate(R.layout.news_fragment, container, false)
+        binding = NewsFragmentBinding.inflate(inflater, container, false)
+        return binding.root
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
@@ -37,11 +44,15 @@ class NewsFragment : DaggerFragment() {
         viewModel.viewStateReadOnly.observe(viewLifecycleOwner, Observer { state ->
             showLoading(false)
             when (state) {
-                is NewsViewModel.ViewState.DataLoaded -> TODO()
+                is NewsViewModel.ViewState.DataLoaded -> renderData(state)
                 NewsViewModel.ViewState.Loading -> showLoading(true)
-                is NewsViewModel.ViewState.Error -> TODO()
+                is NewsViewModel.ViewState.Error -> renderError(state.message)
             }
         })
+
+        adapter = NewsAdapter(imageLoader)
+        binding.articles.addItemDecoration(VerticalSpaceItemDecoration(48))
+        binding.articles.adapter = adapter
     }
 
     private fun showLoading(b: Boolean) {
@@ -54,5 +65,6 @@ class NewsFragment : DaggerFragment() {
 
     private fun renderData(data: NewsViewModel.ViewState.DataLoaded) {
         println("renderData")
+        adapter.update(data.articles)
     }
 }
