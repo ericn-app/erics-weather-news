@@ -9,6 +9,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
 import app.ericn.android_common.ImageLoader
 import app.ericn.ericsweather.databinding.WeatherFragmentBinding
+import app.ericn.ericsweather.location.LocationPermissionsHelper
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -22,6 +23,8 @@ class WeatherFragment : DaggerFragment() {
     lateinit var viewModelFactory: WeatherViewModelFactory
     @Inject
     lateinit var imageLoader: ImageLoader
+    @Inject
+    lateinit var permissionsHelper: LocationPermissionsHelper
 
     private lateinit var binding: WeatherFragmentBinding
     private val viewModel: WeatherViewModel by viewModels { viewModelFactory }
@@ -48,6 +51,25 @@ class WeatherFragment : DaggerFragment() {
                 is WeatherViewModel.ViewState.Error -> renderError(state.message)
             }
         })
+
+        handleLocationPermission()
+    }
+
+    private fun handleLocationPermission() {
+        if (permissionsHelper.isLocationPermissionGranted()) {
+            viewModel.onLocationPermissionGranted()
+        } else {
+            permissionsHelper.requestLocationPermission(this)
+        }
+    }
+
+    override fun onRequestPermissionsResult(
+        requestCode: Int,
+        permissions: Array<out String>,
+        grantResults: IntArray
+    ) {
+        super.onRequestPermissionsResult(requestCode, permissions, grantResults)
+        viewModel.onRequestPermissionResult(requestCode, grantResults)
     }
 
     private fun showEmptyState(b: Boolean) {

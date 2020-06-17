@@ -7,7 +7,7 @@ import dagger.Provides
 @Module
 class MiscModule {
     @Provides
-    fun provideStringProvider(context: Application): app.ericn.android_common.StringProvider {
+    fun provideStringProvider(context: Application): StringProvider {
         return StringProviderImpl(context.resources)
     }
 
