@@ -1,12 +1,11 @@
 package app.ericn.ericsweather
 
 import app.ericn.ericsweather.weather.WeatherModule
-import app.ericn.mylibrary.NewsModule
+import app.ericn.mynews.NewsModule
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Observable
 import io.reactivex.subjects.PublishSubject
-import java.util.*
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 

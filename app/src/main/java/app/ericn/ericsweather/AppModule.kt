@@ -1,8 +1,6 @@
 package app.ericn.ericsweather
 
 import android.app.Application
-import app.ericn.ericsweather.weather.WeatherModule
-import app.ericn.mylibrary.NewsModule
 import dagger.Binds
 import dagger.Module
 import dagger.android.ContributesAndroidInjector
