@@ -13,7 +13,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.rxkotlin.Singles
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
-import io.reactivex.subjects.PublishSubject
 
 class WeatherViewModel(
     currentInteractor: CurrentWeatherInteractor,

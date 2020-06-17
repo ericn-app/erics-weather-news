@@ -17,7 +17,7 @@ import io.reactivex.subjects.PublishSubject
 class NewsViewModel(
     private val interactor: NewsInteractor,
     private val stringProvider: StringProvider,
-    private val searchSubject: Observable<String>
+    searchInputStream: Observable<String>
 ) : ViewModel() {
 
     private val viewState = MutableLiveData<ViewState>()
@@ -25,7 +25,7 @@ class NewsViewModel(
     private val disposables = CompositeDisposable()
 
     init {
-        searchSubject.subscribeOn(Schedulers.io()).flatMapSingle { cityName ->
+        searchInputStream.subscribeOn(Schedulers.io()).flatMapSingle { cityName ->
             interactor(cityName)
         }.observeOn(AndroidSchedulers.mainThread()).subscribe({ articles ->
             viewState.value = ViewState.DataLoaded(articles)

@@ -8,7 +8,7 @@ class WeatherForecastInteractor @Inject constructor(private val repository: Weat
     operator fun invoke(cityName: String): Single<List<WeatherForecast>> {
         return repository.fetchForecast(cityName).map { response ->
             // TODO log to Crashlytics if there are fewer than 5 days in response i.e. list.size<40
-            // Sampling the weather data using mean, may or may not be the optimal UX, needs discussion
+            // Sampling the weather data using the mean of each 24 hours, may or may not be the optimal UX, needs discussion
             response.list.filterIndexed { index, _ -> index % 8 == 4 }.map { forecast ->
                 WeatherForecast(
                     maxTemp = forecast.main.tempMax.roundToInt(),

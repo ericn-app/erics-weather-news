@@ -6,13 +6,12 @@ import app.ericn.android_common.StringProvider
 import app.ericn.ericsweather.weather.core.CurrentWeatherInteractor
 import app.ericn.ericsweather.weather.core.WeatherForecastInteractor
 import io.reactivex.Observable
-import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
 
 class WeatherViewModelFactory @Inject constructor(
     private val currentInteractor: CurrentWeatherInteractor,
     private val forecastInteractor: WeatherForecastInteractor,
-    private val stringProvider: app.ericn.android_common.StringProvider,
+    private val stringProvider: StringProvider,
     private val searchSubject: Observable<String>
 ) : ViewModelProvider.Factory {
     override fun <T : ViewModel?> create(modelClass: Class<T>): T {
