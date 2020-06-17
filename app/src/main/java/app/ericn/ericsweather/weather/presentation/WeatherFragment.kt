@@ -37,14 +37,26 @@ class WeatherFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showEmptyState(true)
+
         viewModel.viewStateReadOnly.observe(viewLifecycleOwner, Observer { state ->
             showLoading(false)
+            showEmptyState(false)
             when (state) {
                 is WeatherViewModel.ViewState.DataLoaded -> renderData(state)
                 WeatherViewModel.ViewState.Loading -> showLoading(true)
                 is WeatherViewModel.ViewState.Error -> renderError(state.message)
             }
         })
+    }
+
+    private fun showEmptyState(b: Boolean) {
+        binding.emptyState.visibility = if (b) View.VISIBLE else View.GONE
+        binding.todayHeader.visibility = if (b) View.GONE else View.VISIBLE
+        binding.cityName.visibility = if (b) View.GONE else View.VISIBLE
+        binding.maxMin.visibility = if (b) View.GONE else View.VISIBLE
+        binding.current.visibility = if (b) View.GONE else View.VISIBLE
+        binding.nextDays.visibility = if (b) View.GONE else View.VISIBLE
     }
 
     private fun showLoading(b: Boolean) {

@@ -9,7 +9,18 @@
     tools:context=".weather.presentation.WeatherFragment">
 
     <TextView
-        android:id="@+id/tv_label"
+        android:id="@+id/empty_state"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:textColor="@android:color/black"
+        android:textSize="18sp"
+        android:text="@string/empty_state"
+        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+    <TextView
+        android:id="@+id/todayHeader"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:text="@string/label_today"
@@ -26,7 +37,7 @@
         android:textColor="@android:color/black"
         android:textSize="48sp"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/tv_label" />
+        app:layout_constraintTop_toBottomOf="@id/todayHeader" />
 
     <ImageView
         android:id="@+id/icon_today"
@@ -34,7 +45,7 @@
         android:layout_height="110dp"
         android:contentDescription="weather symbol"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="@id/tv_label" />
+        app:layout_constraintTop_toTopOf="@id/todayHeader" />
 
     <TextView
         android:id="@+id/max_min"

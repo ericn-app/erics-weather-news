@@ -41,8 +41,11 @@ class NewsFragment : DaggerFragment() {
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
+        showEmptyState(true)
+
         viewModel.viewStateReadOnly.observe(viewLifecycleOwner, Observer { state ->
             showLoading(false)
+            showEmptyState(false)
             when (state) {
                 is NewsViewModel.ViewState.DataLoaded -> renderData(state)
                 NewsViewModel.ViewState.Loading -> showLoading(true)
@@ -53,6 +56,12 @@ class NewsFragment : DaggerFragment() {
         adapter = NewsAdapter(imageLoader)
         binding.articles.addItemDecoration(VerticalSpaceItemDecoration(48))
         binding.articles.adapter = adapter
+    }
+
+    private fun showEmptyState(b: Boolean) {
+        binding.emptyState.visibility = if (b) View.VISIBLE else View.GONE
+        binding.newsHeader.visibility = if (b) View.GONE else View.VISIBLE
+        binding.articles.visibility = if (b) View.GONE else View.VISIBLE
     }
 
     private fun showLoading(b: Boolean) {
