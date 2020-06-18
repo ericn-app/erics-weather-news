@@ -7,6 +7,6 @@ import javax.inject.Inject
 
 class LocationRepository @Inject constructor(private val dataSource: GoogleLocationDataSource) {
     fun getLocation() : Flowable<LocationEntity> {
-        return dataSource.locationObservable
+        return dataSource.locationObservable.distinctUntilChanged()
     }
 }

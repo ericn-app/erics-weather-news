@@ -2,12 +2,13 @@ package app.ericn.ericsweather
 
 import android.os.Bundle
 import androidx.appcompat.widget.SearchView
-import app.ericn.ericsweather.ui.news.NewsFragment
 import app.ericn.ericsweather.databinding.MainActivityBinding
+import app.ericn.ericsweather.ui.news.NewsFragment
 import app.ericn.ericsweather.weather.presentation.WeatherFragment
 import dagger.android.support.DaggerAppCompatActivity
 import io.reactivex.subjects.PublishSubject
 import javax.inject.Inject
+
 
 class MainActivity : DaggerAppCompatActivity() {
     @Inject

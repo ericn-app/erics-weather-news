@@ -11,6 +11,7 @@ import app.ericn.android_common.ImageLoader
 import app.ericn.ericsweather.databinding.WeatherFragmentBinding
 import app.ericn.ericsweather.location.LocationPermissionsHelper
 import dagger.android.support.DaggerFragment
+import kotlinx.android.synthetic.main.weather_fragment.*
 import javax.inject.Inject
 
 class WeatherFragment : DaggerFragment() {
@@ -82,7 +83,7 @@ class WeatherFragment : DaggerFragment() {
     }
 
     private fun showLoading(b: Boolean) {
-
+        binding.loader.visibility = if (b) View.VISIBLE else View.GONE
     }
 
     private fun renderError(message: String) {

@@ -33,6 +33,7 @@ class GoogleLocationDataSource @Inject constructor(private val context: Applicat
 
     private val locationCallback: LocationCallback = object : LocationCallback() {
         override fun onLocationResult(locationResult: LocationResult?) {
+            println("new location result: $locationResult")
             locationResult?.locations?.forEach(::setLocation)
         }
     }
@@ -64,7 +65,7 @@ class GoogleLocationDataSource @Inject constructor(private val context: Applicat
         val gcd = Geocoder(context, Locale.getDefault())
         val addresses: List<Address> = gcd.getFromLocation(location.latitude, location.longitude, 1)
         val cityName = if (addresses.isNotEmpty()) {
-            addresses[0].locality
+            addresses[0].adminArea
         } else {
             null
         }

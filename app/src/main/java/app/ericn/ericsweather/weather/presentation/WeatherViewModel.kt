@@ -36,13 +36,22 @@ class WeatherViewModel(
 
     private fun handleCityNameStream(cityNameStream: Observable<String>): Disposable {
         return cityNameStream
-            .subscribeOn(Schedulers.io())
+            .doOnSubscribe {
+                viewState.value = ViewState.Loading
+            }
+            .doOnEach {
+                println(it)
+            }
             .flatMapSingle { cityName ->
                 Singles.zip(
                     currentInteractor(cityName),
                     forecastInteractor(cityName)
                 )
-            }.observeOn(AndroidSchedulers.mainThread())
+            }
+            .doOnEach {
+                println(it)
+            }
+            .observeOn(AndroidSchedulers.mainThread())
             .subscribe({ result ->
                 val currentWeather = result.first
                 val tomorrow = result.second[0]
@@ -104,7 +113,7 @@ class WeatherViewModel(
             locationUseCase()
                 .map {
                     it.cityName
-                }.distinctUntilChanged()
+                }
                 .toObservable()
         ).addTo(disposables)
     }
