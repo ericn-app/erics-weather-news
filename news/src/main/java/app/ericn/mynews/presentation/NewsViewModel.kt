@@ -24,14 +24,16 @@ class NewsViewModel(
     private val disposables = CompositeDisposable()
 
     init {
-        searchInputStream.subscribeOn(Schedulers.io()).flatMapSingle { cityName ->
-            interactor(cityName)
-        }.observeOn(AndroidSchedulers.mainThread()).subscribe({ articles ->
-            viewState.value = ViewState.DataLoaded(articles)
-        }, { t ->
-            viewState.value =
-                ViewState.Error(t.message ?: stringProvider.getString(R.string.error_generic))
-        }).addTo(disposables)
+        searchInputStream
+            .subscribeOn(Schedulers.io()).flatMapSingle { cityName ->
+                interactor(cityName)
+            }.observeOn(AndroidSchedulers.mainThread())
+            .subscribe({ articles ->
+                viewState.value = ViewState.DataLoaded(articles)
+            }, { t ->
+                viewState.value =
+                    ViewState.Error(t.message ?: stringProvider.getString(R.string.error_generic))
+            }).addTo(disposables)
     }
 
     override fun onCleared() {

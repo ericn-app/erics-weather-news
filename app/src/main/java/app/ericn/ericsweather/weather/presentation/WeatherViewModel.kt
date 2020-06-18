@@ -15,6 +15,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.Singles
 import io.reactivex.rxkotlin.addTo
+import io.reactivex.schedulers.Schedulers
 
 class WeatherViewModel(
     private val currentInteractor: CurrentWeatherInteractor,
@@ -25,7 +26,6 @@ class WeatherViewModel(
     searchSubject: Observable<String>
 ) :
     ViewModel() {
-    private lateinit var currentLocationDisposable: Disposable
     private val viewState = MutableLiveData<ViewState>()
     val viewStateReadOnly: LiveData<ViewState> = viewState
     private val disposables = CompositeDisposable()
@@ -36,6 +36,7 @@ class WeatherViewModel(
 
     private fun handleCityNameStream(cityNameStream: Observable<String>): Disposable {
         return cityNameStream
+            .subscribeOn(Schedulers.io())
             .flatMapSingle { cityName ->
                 Singles.zip(
                     currentInteractor(cityName),
@@ -99,14 +100,13 @@ class WeatherViewModel(
     }
 
     fun onLocationPermissionGranted() {
-        currentLocationDisposable =
-            handleCityNameStream(
-                locationUseCase()
-                    .map {
-                        it.cityName
-                    }.distinctUntilChanged()
-                    .toObservable()
-            )
+        handleCityNameStream(
+            locationUseCase()
+                .map {
+                    it.cityName
+                }.distinctUntilChanged()
+                .toObservable()
+        ).addTo(disposables)
     }
 
     fun onRequestPermissionResult(requestCode: Int, grantResults: IntArray) {
