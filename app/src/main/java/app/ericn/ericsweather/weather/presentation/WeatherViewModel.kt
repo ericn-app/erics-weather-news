@@ -31,7 +31,7 @@ class WeatherViewModel(
     private val disposables = CompositeDisposable()
 
     init {
-        handleCityNameStream(searchSubject).addTo(disposables)
+        handleCityNameStream(searchSubject)
     }
 
     private fun handleCityNameStream(cityNameStream: Observable<String>): Disposable {
@@ -100,7 +100,7 @@ class WeatherViewModel(
             }, { t ->
                 viewState.value =
                     ViewState.Error(t.message ?: stringProvider.getString(R.string.error_generic))
-            })
+            }).addTo(disposables)
     }
 
     override fun onCleared() {
@@ -108,14 +108,12 @@ class WeatherViewModel(
         super.onCleared()
     }
 
+    /**
+     * TODO to move location stuffs to MainActivity level
+     */
     fun onLocationPermissionGranted() {
-        handleCityNameStream(
-            locationUseCase()
-                .map {
-                    it.cityName
-                }
-                .toObservable()
-        ).addTo(disposables)
+        println("onLocationPermissionGranted")
+        handleCityNameStream(locationUseCase().map { it.cityName }.toObservable())
     }
 
     fun onRequestPermissionResult(requestCode: Int, grantResults: IntArray) {

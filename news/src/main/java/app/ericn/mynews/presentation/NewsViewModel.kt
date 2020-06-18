@@ -4,17 +4,20 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import app.ericn.android_common.StringProvider
+import app.ericn.ericsweather.location.GetLocationUseCase
 import app.ericn.mynews.core.Article
 import app.ericn.mynews.core.NewsInteractor
 import app.ericn.mynews.R
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
+import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 
 class NewsViewModel(
     private val interactor: NewsInteractor,
+    getLocationUseCase: GetLocationUseCase,
     private val stringProvider: StringProvider,
     searchInputStream: Observable<String>
 ) : ViewModel() {
@@ -24,7 +27,12 @@ class NewsViewModel(
     private val disposables = CompositeDisposable()
 
     init {
-        searchInputStream
+        handleCityNameStream(getLocationUseCase().map { it.cityName }.toObservable())
+        handleCityNameStream(searchInputStream)
+    }
+
+    private fun handleCityNameStream(handleCityNameStream: Observable<String>) {
+        handleCityNameStream
             .subscribeOn(Schedulers.io()).flatMapSingle { cityName ->
                 interactor(cityName)
             }.observeOn(AndroidSchedulers.mainThread())
