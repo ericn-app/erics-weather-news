@@ -6,5 +6,5 @@ import retrofit2.http.Query
 
 interface NewsApi {
     @GET("v2/top-headlines")
-    fun fetchNews(@Query("q") query: String) : Single<NewsResponse>
+    fun fetchNews(@Query("q") query: String): Single<NewsResponse>
 }

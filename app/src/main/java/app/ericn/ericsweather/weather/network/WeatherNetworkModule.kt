@@ -9,10 +9,12 @@ import okio.IOException
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
 import retrofit2.converter.gson.GsonConverterFactory
+import javax.inject.Named
 
 @Module
 class WeatherNetworkModule {
     @Provides
+    @Named("weather retrofit")
     fun provideWeatherRetrofit(): Retrofit {
         val httpClient = OkHttpClient.Builder()
         httpClient.addInterceptor(object : Interceptor {
@@ -47,7 +49,7 @@ class WeatherNetworkModule {
     }
 
     @Provides
-    fun provideWeatherApi(retrofit: Retrofit) : WeatherApi {
+    fun provideWeatherApi(@Named("weather retrofit") retrofit: Retrofit): WeatherApi {
         return retrofit.create(WeatherApi::class.java)
     }
 }

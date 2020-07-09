@@ -15,7 +15,6 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.Singles
 import io.reactivex.rxkotlin.addTo
-import io.reactivex.schedulers.Schedulers
 
 class WeatherViewModel(
     private val currentInteractor: CurrentWeatherInteractor,
@@ -113,7 +112,9 @@ class WeatherViewModel(
      */
     fun onLocationPermissionGranted() {
         println("onLocationPermissionGranted")
-        handleCityNameStream(locationUseCase().map { it.cityName }.toObservable())
+        handleCityNameStream(locationUseCase().map {
+            it.cityName
+        }.toObservable())
     }
 
     fun onRequestPermissionResult(requestCode: Int, grantResults: IntArray) {

@@ -22,13 +22,15 @@ class LocationPermissionsHelper @Inject constructor(private val context: Applica
     }
 
     fun requestLocationPermission(fragment: Fragment) {
-        requestPermission(fragment, Manifest.permission.ACCESS_COARSE_LOCATION,
+        requestPermission(
+            fragment, Manifest.permission.ACCESS_COARSE_LOCATION,
             LOCATION_PERMISSION_REQUEST_CODE
         )
     }
 
     fun requestLocationPermission(activity: Activity) {
-        requestPermission(activity, Manifest.permission.ACCESS_COARSE_LOCATION,
+        requestPermission(
+            activity, Manifest.permission.ACCESS_COARSE_LOCATION,
             LOCATION_PERMISSION_REQUEST_CODE
         )
     }
@@ -44,7 +46,10 @@ class LocationPermissionsHelper @Inject constructor(private val context: Applica
     }
 
     private fun isPermissionGranted(permission: String): Boolean {
-        return ContextCompat.checkSelfPermission(context, permission) == PackageManager.PERMISSION_GRANTED
+        return ContextCompat.checkSelfPermission(
+            context,
+            permission
+        ) == PackageManager.PERMISSION_GRANTED
     }
 
 }

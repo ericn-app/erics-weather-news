@@ -12,7 +12,7 @@ class WeatherRepository @Inject constructor(private val api: WeatherApi) {
         return api.getWeather(cityName).subscribeOn(Schedulers.io())
     }
 
-    fun fetchForecast(cityName: String) : Single<WeatherForecastResponse> {
+    fun fetchForecast(cityName: String): Single<WeatherForecastResponse> {
         return api.getForecast(cityName).subscribeOn(Schedulers.io())
     }
 }

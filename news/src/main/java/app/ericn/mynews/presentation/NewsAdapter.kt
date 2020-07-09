@@ -4,12 +4,13 @@ import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import app.ericn.android_common.ImageLoader
-import app.ericn.mynews.core.Article
 import app.ericn.mynews.R
+import app.ericn.mynews.core.Article
 import app.ericn.mynews.databinding.ItemNewsBinding
 
-class NewsAdapter(private val imageLoader: ImageLoader) : RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
-    private var items : List<Article> = ArrayList()
+class NewsAdapter(private val imageLoader: ImageLoader) :
+    RecyclerView.Adapter<NewsAdapter.ViewHolder>() {
+    private var items: List<Article> = ArrayList()
 
     class ViewHolder(
         private val binding: ItemNewsBinding,

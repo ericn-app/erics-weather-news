@@ -11,7 +11,6 @@ import app.ericn.android_common.ImageLoader
 import app.ericn.ericsweather.databinding.WeatherFragmentBinding
 import app.ericn.ericsweather.location.LocationPermissionsHelper
 import dagger.android.support.DaggerFragment
-import kotlinx.android.synthetic.main.weather_fragment.*
 import javax.inject.Inject
 
 class WeatherFragment : DaggerFragment() {
@@ -22,8 +21,10 @@ class WeatherFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: WeatherViewModelFactory
+
     @Inject
     lateinit var imageLoader: ImageLoader
+
     @Inject
     lateinit var permissionsHelper: LocationPermissionsHelper
 
@@ -53,7 +54,9 @@ class WeatherFragment : DaggerFragment() {
             }
         })
 
-        handleLocationPermission()
+        if (savedInstanceState == null) {
+            handleLocationPermission()
+        }
     }
 
     private fun handleLocationPermission() {

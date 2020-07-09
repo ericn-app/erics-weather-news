@@ -24,6 +24,7 @@ class NewsFragment : DaggerFragment() {
 
     @Inject
     lateinit var viewModelFactory: NewsViewModelFactory
+
     @Inject
     lateinit var imageLoader: ImageLoader
 

@@ -48,7 +48,7 @@ class NewsNetworkModule {
     }
 
     @Provides
-    fun provideNewsApi(@Named("NewsRetrofit") retrofit: Retrofit) : NewsApi {
+    fun provideNewsApi(@Named("NewsRetrofit") retrofit: Retrofit): NewsApi {
         return retrofit.create(NewsApi::class.java)
     }
 }

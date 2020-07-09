@@ -22,7 +22,8 @@ class GoogleLocationDataSource @Inject constructor(private val context: Applicat
     }
 
     private val locationSubject = PublishSubject.create<LocationEntity>()
-    private val fusedLocationClient: FusedLocationProviderClient = LocationServices.getFusedLocationProviderClient(context)
+    private val fusedLocationClient: FusedLocationProviderClient =
+        LocationServices.getFusedLocationProviderClient(context)
     private val locationRequest: LocationRequest = LocationRequest.create().apply {
         interval =
             LOCATION_REQUEST_INTERVAL

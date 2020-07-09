@@ -1,7 +1,5 @@
 package app.ericn.ericsweather
 
-import app.ericn.ericsweather.weather.WeatherModule
-import app.ericn.mynews.NewsModule
 import dagger.Module
 import dagger.Provides
 import io.reactivex.Observable
@@ -9,8 +7,8 @@ import io.reactivex.subjects.PublishSubject
 import java.util.concurrent.TimeUnit
 import javax.inject.Singleton
 
-@Module(includes = [WeatherModule::class, NewsModule::class])
-class MainModule {
+@Module
+class MainInputModule {
     @Provides
     @Singleton
     fun provideSearchInputStream(): PublishSubject<String> {
