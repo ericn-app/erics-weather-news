@@ -27,7 +27,7 @@ files: [
   # Where translations will be placed
   # e.g. "/resources/%two_letters_code%/%original_file_name%"
   #
-  "translation" : "**/src/main/res/%android_code%/strings.xml",
+  "translation" : "**/src/main/res/values-%two_letters_code%/strings.xml",
 
   #
   # Files or directories for ignore
