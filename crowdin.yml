@@ -1,12 +1,6 @@
-"preserve_hierarchy": true
-
-files: [
-{
-  "source": "/app/src/main/res/values/strings.xml",
-  "translation": "/app/src/main/res/values-%two_letters_code%/%original_file_name%"
-},
-{
-  "source": "/news/src/main/res/values/strings.xml",
-  "translation": "/news/src/main/res/values-%two_letters_code%/%original_file_name%"
-}
-]
+preserve_hierarchy: true
+files:
+  - source: /app/src/main/res/values/strings.xml
+    translation: /app/src/main/res/values-%two_letters_code%/%original_file_name%
+  - source: /news/src/main/res/values/strings.xml
+    translation: /news/src/main/res/values-%two_letters_code%/%original_file_name%
