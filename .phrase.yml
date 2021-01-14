@@ -1,0 +1,13 @@
+phrase:
+  access_token: 4cbc4c39062b36a74ca6e17c34ada130ff386fcb33621c40aba9f62e6be5e2b5
+  project_id: 2b84735f2004c0eadf21d9dbe4a78dad
+  push:
+    sources:
+    - file: './**/src/main/res/values/strings.xml'
+      params:
+        file_format: xml
+  pull:
+    targets:
+    - file: './**/src/main/res/values-<locale_code>/strings.xml'
+      params:
+        file_format: xml
