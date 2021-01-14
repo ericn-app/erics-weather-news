@@ -21,13 +21,13 @@ files: [
   # Source files filter
   # e.g. "/resources/en/*.json"
   #
-  "source" : "*/src/main/res/values/strings.xml",
+  "source" : "**/values/strings.xml",
 
   #
   # Where translations will be placed
   # e.g. "/resources/%two_letters_code%/%original_file_name%"
   #
-  "translation" : "*/src/main/res/values-%two_letters_code%/strings.xml",
+  "translation" : "**/values-%two_letters_code%/strings.xml",
 
   #
   # Files or directories for ignore
