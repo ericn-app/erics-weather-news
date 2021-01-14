@@ -6,7 +6,7 @@
     <string name="max_min">%1$s/%2$s</string>
     <string name="current">Current %1$s</string>
     <string name="search_hint">Enter city name</string>
-    <string name="next_three_days">Next 3 days</string>
+    <string name="next_three_days">Prochains 3 jours</string>
     <string name="error_generic">Something went wrong</string>
     <string name="empty_state">Please tap the search icon to start</string>
 </resources>
