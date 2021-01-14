@@ -1,2 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources></resources>
+<resources>
+    <string name="error_generic">Une erreur s\'est produite</string>
+    <string name="news_highlights">Points forts des actualités</string>
+    <string name="source_by">By %s</string>
+</resources>
