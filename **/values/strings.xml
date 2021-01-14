@@ -1,0 +1,14 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<resources>
+  <string name="app_name">Eric\'s Weather</string>
+  <string name="label_today">Today in</string>
+  <string name="max_min_long">max %1$s / min %2$s</string>
+  <string name="max_min">%1$s/%2$s</string>
+  <string name="current">Current %1$s</string>
+  <string name="search_hint">Enter city name</string>
+  <string name="next_three_days">Next 3 days</string>
+  <string name="error_generic">Something went wrong</string>
+  <string name="empty_state">Please tap the search icon to start</string>
+  <string name="news_highlights">News Highlights</string>
+  <string name="source_by">By %s</string>
+</resources>
