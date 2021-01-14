@@ -1,27 +1,12 @@
-#
-# Your Crowdin credentials
-#
-"project_id": "436726"
-"api_token": "eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJhdWQiOiJ3UUVxdmhVM3ZMT2EyWGljbVV5VCIsImp0aSI6ImI1ZjFhMTJmZDhiODFiZDAyYzBkNjFkYTE2OWY5YjExNTkxNGRlMGQyNmM5OWIzZGU3ZjYzMDhhZTgxOGM5NGM0YzAwOGJiYWViODE3ZjE5IiwiaWF0IjoxNjEwNTUyMzk2LCJuYmYiOjE2MTA1NTIzOTYsImV4cCI6MTYxMzE0NDM5Niwic3ViIjoiMTQ1NzQ1NDAiLCJkb21haW4iOm51bGwsInNjb3BlcyI6WyJwcm9qZWN0Il0sImFzc29jaWF0aW9ucyI6WyIqIl0sInNlc3Npb24iOjB9.VNY4zcgJVaQvctd-5l00rErBu-lRJGe9Dyh1sL1pnGJKFZNsCps0O8Ck272cQ4uBXNi0mDvYmPJ7j58Cc75V3srHP1pQQrVvZU5Xn4KloQ_Fj3z3WtURh8r_CAAVzAt-JZcFmBH1tzdrjpyif8ZetdQ-SjrMUaYeQnXXRPswMyR6mu_U75RWZ8Ii6dfooMGHt7huU15pRmp8fzSSUxIR01ILTp71RlZX1G9cg7vquZzvRABMNntMETMrNzENdI3dIkxMgJnRHoMBmGO_a_kUU0RFfx7eiwuALQy0qxJqy9sgXEXKsh4VF-0sdSiK6kGtXXv0N5qIybIrcbpA2HLflxMRLdzWVmIOrNBhHpco0DG-dC5bMqxGK_gpAQ7HobL77hMxVB-SVEyb6dj2fMbafgmWtleE49IE_DLT4_LFt8B_e_m88WN6gpBwFaOu9_ZbdItCMy4aXe2yUEIvWov4MYxZpta6VDbuHB2dAFLQOJBqU4K1r7FZqZAjh5o7Vf8D3Q6AlNcIjpFy7sGRJ8amrKE2dZHW4J5L_WAIXO7Oaan8NnOKxERZuDsBPEpvzn7Nni1LVcUIp8sKohqLeBcjOlgzqyKTgQqeDUSQirrXruon-1oKwnJ6DEPQVaxMnOWo5tZTrEvN5Uiz7Tey9uJh7zlA-LWqiPyhp8jNezSmqK8"
-"base_path": "."
-"base_url": "https://api.crowdin.com"
-
-#
-# Choose file structure in Crowdin
-# e.g. true or false
-#
 "preserve_hierarchy": true
 
-#
-# Files configuration
-#
 files: [
 {
-  "source": "app/src/main/res/values/strings.xml",
-  "translation": "app/src/main/res/values-%two_letters_code%/%original_file_name%"
+  "source": "/app/src/main/res/values/strings.xml",
+  "translation": "/app/src/main/res/values-%two_letters_code%/%original_file_name%"
 },
 {
-  "source": "news/src/main/res/values/strings.xml",
-  "translation": "news/src/main/res/values-%two_letters_code%/%original_file_name%"
+  "source": "/news/src/main/res/values/strings.xml",
+  "translation": "/news/src/main/res/values-%two_letters_code%/%original_file_name%"
 }
 ]
