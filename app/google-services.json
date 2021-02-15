@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "220492838639",
+    "project_id": "totemic-polygon-280701",
+    "storage_bucket": "totemic-polygon-280701.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:220492838639:android:3a607bd109dcbe56978d1a",
+        "android_client_info": {
+          "package_name": "app.ericn.ericsweather"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "220492838639-gflr1jrn0oietnmst2g7kue3hd5uc9n2.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyD9aZbKXyHjPwdi3_ERP1PxSYnSO0N0cxQ"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "220492838639-gflr1jrn0oietnmst2g7kue3hd5uc9n2.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
