@@ -20,6 +20,13 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
+
+        <meta-data
+            android:name="com.bugsnag.android.API_KEY"
+            android:value="687c1bdc900503383db3482e2e9a3306"/>
+
+        <meta-data android:name="com.rollbar.android.ACCESS_TOKEN"
+            android:value="ac7ca549006848a9a5ad14b5321226b0" />
     </application>
 
 </manifest>
