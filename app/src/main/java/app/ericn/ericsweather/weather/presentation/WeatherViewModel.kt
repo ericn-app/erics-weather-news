@@ -15,8 +15,9 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.disposables.Disposable
 import io.reactivex.rxkotlin.Singles
 import io.reactivex.rxkotlin.addTo
+import javax.inject.Inject
 
-class WeatherViewModel(
+class WeatherViewModel @Inject constructor(
     private val currentInteractor: CurrentWeatherInteractor,
     private val forecastInteractor: WeatherForecastInteractor,
     private val locationUseCase: GetLocationUseCase,

@@ -7,9 +7,11 @@ import android.view.ViewGroup
 import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
+import androidx.lifecycle.ViewModelProvider
 import app.ericn.android_common.ImageLoader
 import app.ericn.ericsweather.databinding.WeatherFragmentBinding
 import app.ericn.ericsweather.location.LocationPermissionsHelper
+import app.ericn.mynews.GenericViewModelFactory
 import dagger.android.support.DaggerFragment
 import javax.inject.Inject
 
@@ -20,7 +22,7 @@ class WeatherFragment : DaggerFragment() {
     }
 
     @Inject
-    lateinit var viewModelFactory: WeatherViewModelFactory
+    lateinit var viewModelFactory: GenericViewModelFactory<WeatherViewModel>
 
     @Inject
     lateinit var imageLoader: ImageLoader
@@ -29,7 +31,9 @@ class WeatherFragment : DaggerFragment() {
     lateinit var permissionsHelper: LocationPermissionsHelper
 
     private lateinit var binding: WeatherFragmentBinding
-    private val viewModel: WeatherViewModel by viewModels { viewModelFactory }
+    private val viewModel: WeatherViewModel by lazy {
+        ViewModelProvider(this, viewModelFactory).get(WeatherViewModel::class.java)
+    }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
