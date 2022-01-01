@@ -1,13 +1,10 @@
 package app.ericn.ericsweather
 
-import android.app.Application
 import app.ericn.android_common.MiscModule
-import dagger.Binds
 import dagger.Module
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 
-
-@Module(includes = [MiscModule::class, MainWrapperModule::class, MainInputModule::class])
-abstract class AppModule {
-    @Binds
-    abstract fun application(app: TheApplication): Application
-}
+@Module(includes = [MiscModule::class])
+@InstallIn(SingletonComponent::class)
+class AppModule

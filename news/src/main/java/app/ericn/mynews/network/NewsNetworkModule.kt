@@ -3,6 +3,8 @@ package app.ericn.mynews.network
 import app.ericn.mynews.BuildConfig
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.components.SingletonComponent
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import okio.IOException
@@ -12,6 +14,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 
 @Module
+@InstallIn(SingletonComponent::class)
 class NewsNetworkModule {
     @Provides
     @Named("NewsRetrofit")

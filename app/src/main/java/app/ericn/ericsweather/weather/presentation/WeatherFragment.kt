@@ -5,24 +5,21 @@ import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import android.widget.Toast
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.viewModels
 import androidx.lifecycle.Observer
-import androidx.lifecycle.ViewModelProvider
 import app.ericn.android_common.ImageLoader
 import app.ericn.ericsweather.databinding.WeatherFragmentBinding
 import app.ericn.ericsweather.location.LocationPermissionsHelper
-import app.ericn.mynews.GenericViewModelFactory
-import dagger.android.support.DaggerFragment
+import dagger.hilt.android.AndroidEntryPoint
 import javax.inject.Inject
 
-class WeatherFragment : DaggerFragment() {
+@AndroidEntryPoint
+class WeatherFragment : Fragment() {
 
     companion object {
         fun newInstance() = WeatherFragment()
     }
-
-    @Inject
-    lateinit var viewModelFactory: GenericViewModelFactory<WeatherViewModel>
 
     @Inject
     lateinit var imageLoader: ImageLoader
@@ -31,9 +28,7 @@ class WeatherFragment : DaggerFragment() {
     lateinit var permissionsHelper: LocationPermissionsHelper
 
     private lateinit var binding: WeatherFragmentBinding
-    private val viewModel: WeatherViewModel by lazy {
-        ViewModelProvider(this, viewModelFactory).get(WeatherViewModel::class.java)
-    }
+    private val viewModel: WeatherViewModel by viewModels()
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,

@@ -3,6 +3,10 @@ package app.ericn.ericsweather.weather.network
 import app.ericn.ericsweather.BuildConfig
 import dagger.Module
 import dagger.Provides
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.ActivityComponent
+import dagger.hilt.android.components.FragmentComponent
+import dagger.hilt.components.SingletonComponent
 import okhttp3.*
 import okhttp3.logging.HttpLoggingInterceptor
 import okio.IOException
@@ -12,6 +16,7 @@ import retrofit2.converter.gson.GsonConverterFactory
 import javax.inject.Named
 
 @Module
+@InstallIn(SingletonComponent::class)
 class WeatherNetworkModule {
     @Provides
     @Named("weather retrofit")

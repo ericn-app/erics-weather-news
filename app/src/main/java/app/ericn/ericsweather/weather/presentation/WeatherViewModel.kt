@@ -9,6 +9,7 @@ import app.ericn.ericsweather.location.GetLocationUseCase
 import app.ericn.ericsweather.location.LocationPermissionsHelper
 import app.ericn.ericsweather.weather.core.CurrentWeatherInteractor
 import app.ericn.ericsweather.weather.core.WeatherForecastInteractor
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -17,6 +18,7 @@ import io.reactivex.rxkotlin.Singles
 import io.reactivex.rxkotlin.addTo
 import javax.inject.Inject
 
+@HiltViewModel
 class WeatherViewModel @Inject constructor(
     private val currentInteractor: CurrentWeatherInteractor,
     private val forecastInteractor: WeatherForecastInteractor,
@@ -24,8 +26,7 @@ class WeatherViewModel @Inject constructor(
     private val permissionsHelper: LocationPermissionsHelper,
     private val stringProvider: StringProvider,
     searchSubject: Observable<String>
-) :
-    ViewModel() {
+) : ViewModel() {
     private val viewState = MutableLiveData<ViewState>()
     val viewStateReadOnly: LiveData<ViewState> = viewState
     private val disposables = CompositeDisposable()

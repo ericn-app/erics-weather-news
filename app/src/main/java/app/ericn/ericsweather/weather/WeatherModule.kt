@@ -1,12 +1,9 @@
 package app.ericn.ericsweather.weather
 
-import app.ericn.ericsweather.weather.network.WeatherNetworkModule
-import app.ericn.ericsweather.weather.presentation.WeatherFragment
 import dagger.Module
-import dagger.android.ContributesAndroidInjector
+import dagger.hilt.InstallIn
+import dagger.hilt.android.components.FragmentComponent
 
-@Module(includes = [WeatherNetworkModule::class])
-abstract class WeatherModule {
-    @ContributesAndroidInjector
-    abstract fun contributeWeatherFragment(): WeatherFragment
-}
+@Module
+@InstallIn(FragmentComponent::class)
+class WeatherModule

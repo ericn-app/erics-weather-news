@@ -8,6 +8,7 @@ import app.ericn.ericsweather.location.GetLocationUseCase
 import app.ericn.mynews.R
 import app.ericn.mynews.core.Article
 import app.ericn.mynews.core.NewsInteractor
+import dagger.hilt.android.lifecycle.HiltViewModel
 import io.reactivex.Observable
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
@@ -15,6 +16,7 @@ import io.reactivex.rxkotlin.addTo
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
+@HiltViewModel
 class NewsViewModel @Inject constructor(
     private val interactor: NewsInteractor,
     getLocationUseCase: GetLocationUseCase,

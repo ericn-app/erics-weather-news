@@ -3,15 +3,15 @@ apply plugin: 'kotlin-android'
 apply plugin: 'kotlin-android-extensions'
 apply plugin: 'kotlin-kapt'
 apply plugin: "com.bugsnag.android.gradle"
+apply plugin: 'dagger.hilt.android.plugin'
 
 android {
-    compileSdkVersion 29
-    buildToolsVersion "29.0.3"
+    compileSdkVersion 30
 
     defaultConfig {
         applicationId "app.ericn.ericsweather"
         minSdkVersion 21
-        targetSdkVersion 29
+        targetSdkVersion 30
         versionCode 2
         versionName "1.0.1"
 
@@ -72,12 +72,6 @@ dependencies {
     implementation 'com.github.bumptech.glide:glide:4.11.0'
     annotationProcessor 'com.github.bumptech.glide:compiler:4.11.0'
 
-    api 'com.google.dagger:dagger:2.25.2'
-    kapt 'com.google.dagger:dagger-compiler:2.25.2'
-    api 'com.google.dagger:dagger-android:2.24'
-    api 'com.google.dagger:dagger-android-support:2.24'
-    kapt 'com.google.dagger:dagger-android-processor:2.24'
-
     implementation("androidx.fragment:fragment-ktx:1.2.5")
 
     implementation project(':news')
@@ -94,4 +88,13 @@ dependencies {
 
     implementation 'com.rollbar:rollbar-java:1.+'
     implementation 'com.rollbar:rollbar-android:1.+@aar'
+
+    // Hilt
+    implementation "com.google.dagger:hilt-android:$daggerVersion"
+    kapt "com.google.dagger:hilt-compiler:$daggerVersion"
+
+}
+
+kapt {
+    correctErrorTypes true
 }
