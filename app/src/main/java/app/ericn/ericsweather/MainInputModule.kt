@@ -12,6 +12,9 @@ import javax.inject.Singleton
 @Module
 @InstallIn(SingletonComponent::class)
 class MainInputModule {
+    /**
+     * Without scoping, dead CTAs can happen due to coexistence of original and new click streams
+     */
     @Provides
     @Singleton
     fun provideSearchInputStream(): PublishSubject<String> {
